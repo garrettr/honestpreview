@@ -2,7 +2,7 @@
     <head>
         <title>Honest Appalachia</title>
         <!-- Stylesheets -->
-        <link rel="stylesheet" href="{{ STATIC_URL }}base.css" type="text/css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" />
     </head>
     <body>
         <div id="container">
@@ -13,7 +13,7 @@
                 <form action="" method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <input type="submit" id="submit_email" value="Go" />
+                    <!-- <input type="submit" id="submit_email" value="Go" /> -->
                 </form>
                 <h2>Interested?</h2>
                 <p>Follow our blog</p>
