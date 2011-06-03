@@ -9,6 +9,9 @@ urlpatterns = patterns('',
     # url(r'^$', 'honestpreview.views.home', name='home'),
     # url(r'^honestpreview/', include('honestpreview.foo.urls')),
 
+    #url(r'^$', home, name="home"),
+    (r'^$', 'views.home'),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
