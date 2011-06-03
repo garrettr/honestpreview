@@ -7,4 +7,5 @@ class MailingList(models.Model):
 
 class Subscriber(models.Model):
     email = models.EmailField()
+    active = models.BooleanField()
     to = models.ForeignKey(MailingList)
