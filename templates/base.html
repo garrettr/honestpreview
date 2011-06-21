@@ -1,0 +1,35 @@
+<html>
+    <head>
+        {% block title %}
+        <title>Honest Appalachia</title>
+        {% endblock %}
+        {% block headincludes %}
+        <!-- favicon --> 
+        <link rel="icon" href="{{STATIC_URL}}img/favicon.png" type="image/png"> 
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" />
+        <!-- Javascript -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+        <script src="{{STATIC_URL}}js/form.js" type="text/javascript"></script>
+        {% endblock %}
+    </head>
+    <body>
+        <div id="container">
+            <div id="contentbox">
+                {% block content %}
+                <h1>Honest Appalachia</h1>
+                <p>Our mission is promote corporate and government transparency in Appalachia.</p>
+                <p><em>Launching soon. Enter your email to receive infrequent updates:</em><p>
+                <form id="signup_form" action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" id="submit_signup" value="Sign up" />
+                </form>
+                <h2>Interested?</h2>
+                <p>Follow our blog</p>
+                <p>Check us out on Twitter</p>
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

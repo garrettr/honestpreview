@@ -1,24 +1,19 @@
-<html>
-    <head>
-        <title>Honest Appalachia</title>
-        <!-- Stylesheets -->
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" />
-    </head>
-    <body>
-        <div id="container">
-            <div id="contentbox">
-                <h1>Honest Appalachia</h1>
-                <p>Our mission is promote corporate and government transparency in Appalachia.</p>
-                <p><em>Launching soon. Enter your email to receive infrequent updates:</em><p>
-                <form action="" method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <!-- <input type="submit" id="submit_email" value="Go" /> -->
-                </form>
-                <h2>Interested?</h2>
-                <p>Follow our blog</p>
-                <p>Check us out on Twitter</p>
-            </div>
-        </div>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style="text-align:center;">Honest Appalachia</h1>
+<p>Our mission is promote corporate and government transparency in Appalachia.</p>
+<p><em>Launching soon. Enter your email to receive infrequent updates:</em><p>
+<div id="signup_form">
+    <form name="signup" id="signup_form" action="" method="post">
+        {% csrf_token %}
+        <label class="error" for="email" id="email_error">Please enter a valid e-mail address.</label>
+        <label for="email" id="email_label">Email: </label>
+        <input type="text" name="email" id="email" size="30" value="" class="text-input" />
+        <input type="submit" id="submit_button" value="Sign up" />
+    </form>
+</div>
+<h2>Interested?</h2>
+<p>Check out our <a href="http://blog.honestappalachia.org">blog</a></p>
+<p>Follow us on <a href="http://www.twitter.com/happalachia">Twitter</a></p>
+{% endblock %}
