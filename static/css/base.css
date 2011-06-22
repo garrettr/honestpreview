@@ -47,7 +47,7 @@ html
     display:block;
 }
 
-#email
+#id_email
 {
     width: 250px;
     /* float: left; */
@@ -61,6 +61,10 @@ html
     border-radius: 3px;
 }
 
-.success {
-    background-color: green;
+#submit_button
+{
+    float:right;
+    position:relative;
+    top:-48px;
+    right:10px;
 }
