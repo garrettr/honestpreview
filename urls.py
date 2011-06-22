@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     #url(r'^$', home, name="home"),
     (r'^$', 'views.home'),
     (r'^signup$', 'views.validate_signup'),
+    (r'^thanks/$', 'views.signup_thanks'),
 
     # django-newsletter
     (r'^newsletter/', include('newsletter.urls')),
