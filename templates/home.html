@@ -8,9 +8,7 @@
 <div id="signup_form">
     <form name="signup" id="signup_form" action="" method="post">
         {% csrf_token %}
-        <label class="error" for="email" id="email_error">Please enter a valid e-mail address.</label>
-        <label for="email" id="email_label">Email: </label>
-        <input type="text" name="email" id="email" size="30" value="" class="text-input" />
+        {{ form.as_p }}
         <input type="submit" id="submit_button" value="Sign up" />
     </form>
 </div>
