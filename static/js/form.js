@@ -1,3 +1,6 @@
+/* Adds CSRF token to AJAX POST requests done with JQuery.
+ * From https://docs.djangoproject.com/en/dev/ref/contrib/csrf/#ajax
+ */
 $(document).ajaxSend(function(event, xhr, settings) {
     function getCookie(name) {
         var cookieValue = null;
@@ -35,21 +38,26 @@ $(document).ajaxSend(function(event, xhr, settings) {
     }
 });
 
+/* Signup form
+ */
+
 function validEmail(string) {
     // refine this regex for basic email validation
+    // use DNS-check or similar method for validation
     var checkEmail = /[\w-.]+@[\w-.]+\.\w{2,8}/;
     return checkEmail.test(string);
 }
 
-$(function () {
-    $('.error').hide();
+$(function () {     // when the DOM is ready
+    $('.error').hide();     // hide notifications
+
     $('#submit_button').click(function (e) {
         e.preventDefault();
 
         // validate and process form
         var email = $('input#email').val();
         if (validEmail(email)) {
-            // submit
+            // make sure the error is hidden
             $("label#email_error").hide();
         } else {
             // nope
