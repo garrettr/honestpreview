@@ -3,6 +3,7 @@
 {% block content %}
 <h1 style="text-align:center;">Honest Appalachia</h1>
 <p>Our mission is promote corporate and government transparency in Appalachia.</p>
+{% block signup %}
 <p><em>Launching soon. Enter your email to receive infrequent updates:</em><p>
 <div id="signup_form">
     <form name="signup" id="signup_form" action="" method="post">
@@ -13,6 +14,7 @@
         <input type="submit" id="submit_button" value="Sign up" />
     </form>
 </div>
+{% endblock %}
 <h2>Interested?</h2>
 <p>Check out our <a href="http://blog.honestappalachia.org">blog</a></p>
 <p>Follow us on <a href="http://www.twitter.com/happalachia">Twitter</a></p>
