@@ -55,14 +55,14 @@ $(function () {     // when the DOM is ready
         e.preventDefault();
 
         // validate and process form
-        var email = $('input#email').val();
+        var email = $('input#id_email').val();
         if (validEmail(email)) {
             // make sure the error is hidden
             $("label#email_error").hide();
         } else {
             // nope
             $("label#email_error").show();
-            $("input#email").focus();
+            $("input#id_email").focus();
             return false;   // don't submit the form
         }
 
