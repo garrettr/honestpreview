@@ -3,16 +3,16 @@
 {% block content %}
 <h1 style="text-align:center;">Honest Appalachia</h1>
 <p>Our mission is promote corporate and government transparency in Appalachia.</p>
+{% block signup %}
 <p><em>Launching soon. Enter your email to receive infrequent updates:</em><p>
 <div id="signup_form">
     <form name="signup" id="signup_form" action="" method="post">
         {% csrf_token %}
-        <label class="error" for="email" id="email_error">Please enter a valid e-mail address.</label>
-        <label for="email" id="email_label">Email: </label>
-        <input type="text" name="email" id="email" size="30" value="" class="text-input" />
+        {{ form.as_p }}
         <input type="submit" id="submit_button" value="Sign up" />
     </form>
 </div>
+{% endblock %}
 <h2>Interested?</h2>
 <p>Check out our <a href="http://blog.honestappalachia.org">blog</a></p>
 <p>Follow us on <a href="http://www.twitter.com/happalachia">Twitter</a></p>

@@ -12,6 +12,10 @@ urlpatterns = patterns('',
     #url(r'^$', home, name="home"),
     (r'^$', 'views.home'),
     (r'^signup$', 'views.validate_signup'),
+    (r'^thanks/$', 'views.signup_thanks'),
+
+    # django-newsletter
+    (r'^newsletter/', include('newsletter.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
