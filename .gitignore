@@ -9,3 +9,6 @@
 
 # Ignore Apple Computer
 .DS_Store
+
+# Ignore local (deployment) settings.py
+local_settings.py
