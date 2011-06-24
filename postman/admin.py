@@ -1,11 +1,15 @@
 from django.contrib import admin
-from postman.models import MailingList, Subscriber
+from postman.models import Subscription, Message
 
-class MailingListAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+class SubscriptionAdmin(admin.ModelAdmin):
+    list_display = ('email', 'subscribed', 'created_on',)
+    search_fields = ('email',)
+    list_filter = ('subscribed',)
 
-class SubscriberAdmin(admin.ModelAdmin):
-    list_display = ('email', 'active', 'to',)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('sender', 'subject', 'status',)
+    search_fields = ('subject', 'body',)
+    list_filter = ('status',)
 
-admin.site.register(MailingList, MailingListAdmin)
-admin.site.register(Subscriber, SubscriberAdmin)
+admin.site.register(Subscription, SubscriptionAdmin)
+admin.site.register(Message, MessageAdmin)

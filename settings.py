@@ -134,12 +134,12 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    #'postman',
     #'south',
     # using django-newsletter
     'tinymce',
     'django_extensions',
-    'newsletter',
+    #'newsletter',
+    'postman',
 )
 
 # A sample logging configuration. The only tangible logging

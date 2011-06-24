@@ -4,34 +4,7 @@ from django.template import RequestContext
 from django.http import Http404
 
 from postman.forms import SubscribeForm
-from newsletter.models import Newsletter, Subscription
-
-CURRENTNL = "hpdev"
-
-def check_nl():
-    '''
-    Make sure CURRENTNL exists
-    '''
-    try:
-        nl = Newsletter.objects.get(title=CURRENTNL)
-    except:
-        # TODO: handle this properly
-        pass
-    return nl
-
-def subscribe(email):
-    '''
-    Subscribe a given email to CURRENTNL
-    '''
-    nl = check_nl()
-    try:
-        Subscription.objects.get(email_field=email)
-    except:
-        s = Subscription(
-                email_field = email,
-                newsletter = nl
-            )
-        s.save()
+from postman.views import subscribe, unsubscribe
 
 def home(request):
     '''
@@ -64,7 +37,9 @@ def signup_thanks(request):
         )
 
 def validate_signup(request):
-    '''Validates signup POSTed via AJAX - disallows any other input'''
+    '''
+    Validates signup POSTed via AJAX - disallows any other input
+    '''
     if request.is_ajax() and request.method == "POST":
         # check that POSTed data is good, generate a response
         # Gather what's needed 
