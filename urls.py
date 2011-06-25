@@ -20,6 +20,9 @@ urlpatterns = patterns('',
     # postman
     # (r'^postman/', include('postman.urls')),
 
+    # grappelli
+    (r'^grappelli/', include('grappelli.urls')),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
