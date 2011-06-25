@@ -21,8 +21,8 @@ class SubscriptionBase(models.Model):
     '''
     subscribed = models.BooleanField(_('subscribed'), default=True)
     email = models.EmailField(_('email'), unique=True)
-    created_on = models.DateField(_('created on'), blank=True)
-    updated_on = models.DateField(_('updated on'), blank=True)
+    created_on = models.DateTimeField(_('created on'), auto_now_add=True)
+    updated_on = models.DateTimeField(_('updated on'), auto_now=True)
     #activation_code = models.CharField(_('activation code'), max_length=40,
     #        default=make_activation_code)
 
@@ -39,12 +39,6 @@ class SubscriptionBase(models.Model):
     def __unicode__(self):
         return u'%s' % (self.email)
 
-    def save(self, *args, **kwargs):
-        if not self.created_on:
-            self.created_on = datetime.date.today()
-        self.updated_on = datetime.date.today()
-        super(SubscriptionBase,self).save(*args, **kwargs)
-
 class Subscription(SubscriptionBase):
     '''
     Subscription
@@ -52,22 +46,37 @@ class Subscription(SubscriptionBase):
     def save(self, *args, **kwargs):
         super(Subscription, self).save()
 
+class MailingList(models.Model):
+    title = models.CharField(_('title'), max_length=200)
+    subscribers = models.ManyToManyField(Subscription,
+        related_name="mailing_list", blank=True)
+    created_on = models.DateTimeField(_('created on'), auto_now_add=True)
+    updated_on = models.DateTimeField(_('updated on'), auto_now=True)
+
+    def __unicode__(self):
+        return u'%s' % (self.title)
+
 class Message(models.Model):
     '''
     Allows you to write e-mail messages to the list using Markdown;
     saves them in a database
     '''
-    email = models.CharField(_('email'), max_length=200, help_text=_('Sender e-mail'))
+    from_email = models.CharField(_('email'), max_length=200, help_text=_('Sender e-mail'))
     sender = models.CharField(_('sender'), max_length=200, help_text=_('Sender name'))
     subject = models.CharField(blank=False, max_length=140)
     body = models.TextField(help_text=_('Supports Markdown'))
     body_html = models.TextField(editable=False, blank=True)
+
+    recipients = models.ManyToManyField(MailingList, blank=True)
 
     STATUS_CHOICES = (
         (u'D', u'Draft'),
         (u'S', u'Sent'),
     )
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+
+    created_on = models.DateTimeField(_('created on'), auto_now_add=True)
+    updated_on = models.DateTimeField(_('updated on'), auto_now=True)
 
     def __unicode__(self):
         return u'%s, from %s' % (self.subject, self.sender)
