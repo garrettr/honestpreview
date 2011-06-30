@@ -4,7 +4,8 @@ from django.utils.hashcompat import sha_constructor
 
 from markdown import markdown
 
-import datetime
+from datetime import datetime
+import random
 
 # Code taken liberally from
 # https://github.com/howiworkdaily/django-newsletter
@@ -24,7 +25,7 @@ class SubscriptionBase(models.Model):
     created_on = models.DateTimeField(_('created on'), auto_now_add=True)
     updated_on = models.DateTimeField(_('updated on'), auto_now=True)
     deactivation_code = models.CharField(_('deactivation code'), max_length=40,
-            default=make_activation_code)
+            editable=False, default=make_activation_code)
 
     class Meta:
         abstract = True
