@@ -73,7 +73,8 @@ class Message(models.Model):
         (u'D', u'Draft'),
         (u'S', u'Sent'),
     )
-    status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES,
+            default='D', blank=False)
 
     created_on = models.DateTimeField(_('created on'), auto_now_add=True)
     updated_on = models.DateTimeField(_('updated on'), auto_now=True)
