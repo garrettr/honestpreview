@@ -5,6 +5,6 @@ A simple preview site for Honest Appalachia. Visitors can sign up on our mailing
 Dependencies
 ------------
 Django 1.3
-This site uses [django-newsletter] for newsletter publishing, so all other dependencies are the same as for django-newsletter.
-
-[django-newsletter]: https://github.com/dokterbob/django-newsletter
+Grappelli
+tinymce and django_extensions currently included, not required (or even in use right now)
+postman
