@@ -18,21 +18,26 @@ class MessageAdmin(admin.ModelAdmin):
     actions = ['send_message']
     def send_message(self, request, queryset):
         from django.core.mail import send_mail
+        num_recipients = 0
         # for each message in queryset (could select multiple)
         for message in queryset:
             # iterate through recipients and send an email
             for mailing_list in message.recipients.all():
                 for subscriber in mailing_list.subscribers.all():
+                    num_recipients += 1
                     print "Sending %s to %s" % (message.subject,
                             subscriber.email)
                     #send_mail(message.subject, message.body_html,
                     #        message.from_email, [subscriber.email],
                     #        fail_silently=False)
-            # mark message as sent
-            message.status = 'S'
-            message.save()
-
-
+        # mark messages as sent
+        messages_sent = queryset.update(status='S')
+        if messages_sent == 1:
+            message_bit = "1 message was"
+        else:
+            message_bit = "%s messages were" % messages_sent
+        self.message_user(request, "%s successfully sent to a total of %d recipients."
+                % (message_bit, num_recipients))
 
 admin.site.register(Subscription, SubscriptionAdmin)
 admin.site.register(Message, MessageAdmin)
