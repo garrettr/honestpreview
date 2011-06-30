@@ -79,7 +79,7 @@ class Message(models.Model):
     updated_on = models.DateTimeField(_('updated on'), auto_now=True)
 
     def __unicode__(self):
-        return u'%s, from %s' % (self.subject, self.sender)
+        return u'%s' % (self.subject)
 
     def save(self, *args, **kwargs):
         self.body_html = markdown(self.body)
