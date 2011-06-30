@@ -18,14 +18,15 @@ def subscribe(email):
         s = Subscription(email = email,)
         s.save()
 
-def unsubscribe(email):
+def unsubscribe(code):
     '''
     Unsubscribe an email from the list; return False if they were not
     unsubscribed (meaning they weren't subscribed in the first place)
     '''
     try:
-        s = Subscription.objects.get(email=email)
+        s = Subscription.objects.get(deactivation_code=code)
         s.subscribed = False
         s.save()
+        return HttpResponseRedirect('/newsletter/unsubscribe/confirmation/')
     except:
-        return False
+        return HttpResponseRedirect('/newsletter/unsubscribe/error')

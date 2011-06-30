@@ -23,8 +23,8 @@ class SubscriptionBase(models.Model):
     email = models.EmailField(_('email'), unique=True)
     created_on = models.DateTimeField(_('created on'), auto_now_add=True)
     updated_on = models.DateTimeField(_('updated on'), auto_now=True)
-    #activation_code = models.CharField(_('activation code'), max_length=40,
-    #        default=make_activation_code)
+    deactivation_code = models.CharField(_('deactivation code'), max_length=40,
+            default=make_activation_code)
 
     class Meta:
         abstract = True
@@ -72,7 +72,7 @@ class Message(models.Model):
     sender = models.CharField(_('sender'), max_length=200,
             help_text=_('Sender name'), default="Honest Appalachia")
     subject = models.CharField(blank=False, max_length=140)
-    body = models.TextField(help_text=_('Supports Markdown'))
+    body = models.TextField()
     body_html = models.TextField(editable=False, blank=True)
 
     recipients = models.ManyToManyField(MailingList, blank=True)
@@ -92,4 +92,5 @@ class Message(models.Model):
 
     def save(self, *args, **kwargs):
         self.body_html = markdown(self.body)
+        self.body_html = "<html>" + self.body_html + "</html>"
         super(Message, self).save(*args, **kwargs)

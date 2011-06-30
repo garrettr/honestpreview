@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     # (r'^newsletter/', include('newsletter.urls')),
 
     # postman
-    # (r'^postman/', include('postman.urls')),
+    (r'^newsletter/', include('postman.urls')),
 
     # grappelli
     (r'^grappelli/', include('grappelli.urls')),
