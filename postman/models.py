@@ -61,8 +61,16 @@ class Message(models.Model):
     Allows you to write e-mail messages to the list using Markdown;
     saves them in a database
     '''
-    from_email = models.CharField(_('email'), max_length=200, help_text=_('Sender e-mail'))
-    sender = models.CharField(_('sender'), max_length=200, help_text=_('Sender name'))
+    # try to import default from_email
+    try:
+        from settings import DEFAULT_FROM_EMAIL
+    except ImportError:
+        DEFAULT_FROM_EMAIL=''
+
+    from_email = models.CharField(_('email'), max_length=200,
+            help_text=_('Sender e-mail'), default=DEFAULT_FROM_EMAIL)
+    sender = models.CharField(_('sender'), max_length=200,
+            help_text=_('Sender name'), default="Honest Appalachia")
     subject = models.CharField(blank=False, max_length=140)
     body = models.TextField(help_text=_('Supports Markdown'))
     body_html = models.TextField(editable=False, blank=True)
