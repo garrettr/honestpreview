@@ -12,7 +12,7 @@ class MailingListAdmin(admin.ModelAdmin):
     filter_horizontal = ('subscribers',)
 
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ('sender', 'subject', 'status',)
+    list_display = ('sender', 'subject', 'status', 'created_on', 'updated_on',)
     search_fields = ('subject', 'body',)
     list_filter = ('status',)
     actions = ['send_message']
@@ -25,11 +25,9 @@ class MessageAdmin(admin.ModelAdmin):
             for mailing_list in message.recipients.all():
                 for subscriber in mailing_list.subscribers.all():
                     num_recipients += 1
-                    print "Sending %s to %s" % (message.subject,
-                            subscriber.email)
-                    #send_mail(message.subject, message.body_html,
-                    #        message.from_email, [subscriber.email],
-                    #        fail_silently=False)
+                    send_mail(message.subject, message.body_html,
+                            message.from_email, [subscriber.email],
+                            fail_silently=False)
         # mark messages as sent
         messages_sent = queryset.update(status='S')
         if messages_sent == 1:
