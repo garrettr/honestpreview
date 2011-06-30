@@ -21,7 +21,7 @@ class MessageAdmin(admin.ModelAdmin):
         # for each message in queryset (could select multiple)
         for message in queryset:
             # iterate through recipients and send an email
-            for mailing_list in message.recipients.all():
+            for mailing_list in message.lists.all():
                 for subscriber in mailing_list.subscribers.all():
                     print "Sending %s to %s" % (message.subject,
                             subscriber.email)

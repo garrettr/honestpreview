@@ -67,7 +67,7 @@ class Message(models.Model):
     body = models.TextField(help_text=_('Supports Markdown'))
     body_html = models.TextField(editable=False, blank=True)
 
-    recipients = models.ManyToManyField(MailingList, blank=True)
+    lists = models.ManyToManyField(MailingList, blank=True)
 
     STATUS_CHOICES = (
         (u'D', u'Draft'),
