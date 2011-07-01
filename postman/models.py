@@ -15,6 +15,11 @@ import random
 def make_activation_code():
     return sha_constructor(sha_constructor(str(random.random())).hexdigest()[:5]+str(datetime.now().microsecond)).hexdigest()
 
+class SubscribedManager(models.Manager):
+    def get_query_set(self):
+        return super(SubscribedManager,
+                self).get_query_set().filter(subscribed=True).order_by('email')
+
 class SubscriptionBase(models.Model):
     '''
     Abstract base class for Subscription
@@ -29,6 +34,12 @@ class SubscriptionBase(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ('email',)
+
+    # Managers
+    # note - the Django admin uses the first manager it sees
+    objects = models.Manager()
+    are_subscribed = SubscribedManager()
 
     @classmethod
     def is_subscribed(cls, email):

@@ -23,7 +23,7 @@ class MessageAdmin(admin.ModelAdmin):
         for message in queryset:
             # iterate through recipients and send an email
             for mailing_list in message.recipients.all():
-                for subscriber in mailing_list.subscribers.all():
+                for subscriber in mailing_list.subscribers.are_subscribed():
                     num_recipients += 1
 	            message.body = message.body + "\n\n----\nUnsubscribe: to unsubscribe, follow this link: http://happalachia.webfactional.com/newsletter/unsubscribe/%s" % subscriber.deactivation_code
                     send_mail(message.subject, message.body,
