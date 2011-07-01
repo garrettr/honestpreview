@@ -15,11 +15,6 @@ import random
 def make_activation_code():
     return sha_constructor(sha_constructor(str(random.random())).hexdigest()[:5]+str(datetime.now().microsecond)).hexdigest()
 
-class SubscribedManager(models.Manager):
-    def get_query_set(self):
-        return super(SubscribedManager,
-                self).get_query_set().filter(subscribed=True).order_by('email')
-
 class SubscriptionBase(models.Model):
     '''
     Abstract base class for Subscription
@@ -36,11 +31,6 @@ class SubscriptionBase(models.Model):
         abstract = True
         ordering = ('email',)
 
-    # Managers
-    # note - the Django admin uses the first manager it sees
-    objects = models.Manager()
-    are_subscribed = SubscribedManager()
-
     @classmethod
     def is_subscribed(cls, email):
         try:
@@ -56,14 +46,21 @@ class Subscription(SubscriptionBase):
     Subscription
     '''
     def save(self, *args, **kwargs):
+        if self.subscribed == False:
+            self.mailinglists.clear()
         super(Subscription, self).save()
 
 class MailingList(models.Model):
     title = models.CharField(_('title'), max_length=200)
     subscribers = models.ManyToManyField(Subscription,
-        related_name="mailing_list", blank=True)
+        related_name="mailinglists", blank=True,
+        limit_choices_to = {'subscribed': True})
     created_on = models.DateTimeField(_('created on'), auto_now_add=True)
     updated_on = models.DateTimeField(_('updated on'), auto_now=True)
+
+    # note: limit_choices_to only controls what's shown in the admin
+    # if front-facing unsubscription code isn't work, the admin paints an
+    # unreliable picture of what the database looks like
 
     def __unicode__(self):
         return u'%s' % (self.title)
