@@ -18,7 +18,7 @@ def subscribe(email):
         s = Subscription(email = email,)
         s.save()
 
-def unsubscribe(code):
+def unsubscribe(request, code):
     '''
     Unsubscribe an email from the list; return False if they were not
     unsubscribed (meaning they weren't subscribed in the first place)
