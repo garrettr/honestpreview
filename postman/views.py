@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.mail import send_mail
 from postman.models import Subscription, Message
 
