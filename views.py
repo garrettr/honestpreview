@@ -30,7 +30,7 @@ def home(request):
 def signup_thanks(request):
     '''
     Redirects to a simple thank you page.
-    Needed in casse a user signs up without using Javascript
+    Needed in case a user signs up without using Javascript
     '''
     return render_to_response('thanks.html', {},
             context_instance=RequestContext(request)
@@ -41,8 +41,6 @@ def validate_signup(request):
     Validates signup POSTed via AJAX - disallows any other input
     '''
     if request.is_ajax() and request.method == "POST":
-        # check that POSTed data is good, generate a response
-        # Gather what's needed 
         email = request.POST['email']
         subscribe(email)
         message = "<p>Thanks for signing up!</p>"
