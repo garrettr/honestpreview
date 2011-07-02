@@ -14,25 +14,29 @@ html
 {
 }
 
-#contentbox
+.trans_box
 {
-    margin: 10% auto;
-    padding: 5px 15px;
-    width: 400px;
     background-color: rgba(0, 0, 0, 0.8);
     color: rgb(255, 255, 255);
 }
 
-#contentbox a
+.trans_box a
 {
     /* color: rgb(134,169,252); */
     color: rgb(161, 189, 255);
     text-decoration:none;
 }
 
-#contentbox a:hover
+.trans_box a:hover
 {
     text-decoration:underline;
+}
+
+#contentbox
+{
+    margin: 10% auto;
+    padding: 5px 15px;
+    width: 400px;
 }
 
 .error {
@@ -65,4 +69,13 @@ html
     position:relative;
     top:-48px;
     right:10px;
+}
+
+#photo_credit
+{
+    position:fixed;
+    bottom:0px;
+    right:0px;
+    font-size: 13px;
+    padding: 0px 10px;
 }
