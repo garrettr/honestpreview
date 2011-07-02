@@ -30,10 +30,10 @@ def unsubscribe(request, code):
         s = Subscription.objects.get(deactivation_code=code)
         s.subscribed = False
         s.save()
-        return HttpResponseRedirect('newsletter/unsubscribe/confirmation/%d' %
+        return HttpResponseRedirect('/newsletter/unsubscribe/confirmation/%d/' %
                 s.pk)
     except:
-        return HttpResponseRedirect('newsletter/unsubscribe/error/%d' % s.pk)
+        return HttpResponseRedirect('/newsletter/unsubscribe/error/%d/' % s.pk)
 
 def unsubscribe_confirm(request, id):
     s = Subscription.objects.get(pk=id)
