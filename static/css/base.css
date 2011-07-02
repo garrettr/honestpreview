@@ -1,13 +1,11 @@
 html
 {
     background-image:url(/static/img/kentuckysun.jpg);
-    background-repeat-x: none;
-    background-repeat-y: none;
     background-attachment: fixed;
-    background-position-x: 50%;
-    background-position-y: 50%;
     background-origin: initial;
     background-clip: initial;
+    background-repeat: no-repeat;
+    background-position: center center;
     background-color:black;
     font-size: 18px;
 }
